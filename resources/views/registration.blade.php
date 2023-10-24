@@ -39,8 +39,8 @@
                         <input type="password" class="form-control narrow-input @error('password') is-invalid @enderror" id="password" name="password" placeholder="Enter your password" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="password_confirmation">Verify Password:</label>
-                        <input type="password" class="form-control narrow-input" id="password" name="password_confirmation" placeholder="Verify your password" required>
+                        <label class="form-label" for="password_confirmation">Confirm Password:</label>
+                        <input type="password" class="form-control narrow-input" id="password" name="password_confirmation" placeholder="Confirm your password" required>
                     </div>
                     <div class="g-recaptcha pb-3" data-sitekey="6LeKw8YoAAAAAJFV36rQPlijGksgNmascpiLfN7K"></div>
 

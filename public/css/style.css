@@ -7,6 +7,6 @@ body {
     width: 300px;
 }
 
-.btn-success{
-    width: 300px;
+.btn-signin {
+    background-color: #90C271; /* Adjust the color and transparency as needed */
 }

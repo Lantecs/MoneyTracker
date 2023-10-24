@@ -24,7 +24,7 @@
 
                 <h3 class="fw-bold">Create new account</h3>
                 <p class="pb-3">Please enter your details:</p>
-                <form action="{{ route('registration.post') }}" method="POST">
+                <form action="{{ route('registration.post') }}" method="POST" id="registrationForm">
                     @csrf
                     <div class="mb-3">
                         <label class="form-label" for="name">Full Name:</label>
@@ -42,6 +42,8 @@
                         <label class="form-label" for="password_confirmation">Verify Password:</label>
                         <input type="password" class="form-control narrow-input" id="password" name="password_confirmation" placeholder="Verify your password" required>
                     </div>
+                    <div class="g-recaptcha pb-3" data-sitekey="6LeKw8YoAAAAAJFV36rQPlijGksgNmascpiLfN7K"></div>
+
                     <button type="submit" class="btn btn-success btn-signin">Sign up</button>
                     <p class="text-center pt-2">Already have an account? <a href="{{route('login')}}">Sign in</a></p>
                 </form>
@@ -55,6 +57,7 @@
         </div>
     </div>
 </div>
+
 
 
 

@@ -35,6 +35,8 @@
                         <input type="password" placeholder="*********" class="form-control narrow-input" name="password">
                         <a href="#" class="float-end pb-4">Forgot password</a>
                     </div>
+                    <div class="g-recaptcha pb-5" data-sitekey="6LeKw8YoAAAAAJFV36rQPlijGksgNmascpiLfN7K"></div>
+
                     <button type="submit" class="btn btn-success btn-signin">Sign in</button>
                     <p class="text-center pt-2">Don't have an account? <a href="{{route('registration')}}">Sign up</a></p>
                 </form>

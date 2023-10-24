@@ -31,6 +31,8 @@ class AuthManager extends Controller
         $request->validate([
             'email' => 'required',
             'password' => 'required | max:8',
+            'g-recaptcha-response' => 'required|captcha',
+
         ]);
 
         $credentials = $request->only('email', 'password');
@@ -47,6 +49,7 @@ class AuthManager extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'min:8|max:255|required|confirmed',
             'password_confirmation' => 'min:8|max:255',
+            'g-recaptcha-response' => 'required|captcha',
         ]);
 
         $data['name'] = $request->name;

@@ -9,7 +9,8 @@
             <div class="container signin">
                 <h3 class="fw-bold">Welcome!</h3>
                 <p class="pb-3">Please enter your details:</p>
-                <form>
+                <form action="{{ route('login.post')}}" method="POST">
+                    @csrf
                     <div class="mb-3">
                         <label class="form-label">Email:</label>
                         <input type="email" placeholder="Enter your email" class="form-control narrow-input" name="email">

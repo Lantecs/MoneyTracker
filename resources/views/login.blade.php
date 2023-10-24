@@ -11,12 +11,12 @@
                 <p class="pb-3">Please enter your details:</p>
                 <form>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email:</label>
-                        <input type="email" class="form-control narrow-input" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="InputEmail1" class="form-label">Email:</label>
+                        <input type="email" placeholder="Enter your email" class="form-control narrow-input" id="InputEmail1" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password:</label>
-                        <input type="password" class="form-control narrow-input" id="exampleInputPassword1">
+                        <label for="InputPassword1" class="form-label">Password:</label>
+                        <input type="password" placeholder="*********" class="form-control narrow-input" id="InputPassword1">
                         <a href="#" class="float-end pb-4">Forgot password</a>
                     </div>
                     <button type="submit" class="btn btn-success btn-signin">Sign in</button>

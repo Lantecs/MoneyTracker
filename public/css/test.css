@@ -49,3 +49,8 @@ body {
     justify-items: center;
 }
 
+::-webkit-input-placeholder {
+    color: #ABABAB;
+    font-style: italic;
+ }
+

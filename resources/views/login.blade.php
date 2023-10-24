@@ -7,6 +7,21 @@
     <div class="row">
         <div class="col col1">
             <div class="container signin">
+            @if ($errors->any())
+                    <div class="col-12">
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger">{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
+
+                @if (session()->has('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
+
+                @if (session()->has('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
                 <h3 class="fw-bold">Welcome!</h3>
                 <p class="pb-3">Please enter your details:</p>
                 <form action="{{ route('login.post')}}" method="POST">
@@ -21,7 +36,7 @@
                         <a href="#" class="float-end pb-4">Forgot password</a>
                     </div>
                     <button type="submit" class="btn btn-success btn-signin">Sign in</button>
-                    <p class="text-center pt-2">Don't have an account? <a href="#">Sign up</a></p>
+                    <p class="text-center pt-2">Don't have an account? <a href="{{route('registration')}}">Sign up</a></p>
                 </form>
             </div>
         </div>

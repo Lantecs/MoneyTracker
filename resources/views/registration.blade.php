@@ -43,7 +43,7 @@
                         <input type="password" class="form-control narrow-input" id="password" name="password_confirmation" placeholder="Verify your password" required>
                     </div>
                     <button type="submit" class="btn btn-success btn-signin">Sign up</button>
-                    <p class="text-center pt-2">Already have an account? <a href="#">Sign in</a></p>
+                    <p class="text-center pt-2">Already have an account? <a href="{{route('login')}}">Sign in</a></p>
                 </form>
             </div>
         </div>

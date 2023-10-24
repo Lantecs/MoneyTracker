@@ -11,12 +11,12 @@
                 <p class="pb-3">Please enter your details:</p>
                 <form>
                     <div class="mb-3">
-                        <label for="InputEmail1" class="form-label">Email:</label>
-                        <input type="email" placeholder="Enter your email" class="form-control narrow-input" id="InputEmail1" aria-describedby="emailHelp">
+                        <label class="form-label">Email:</label>
+                        <input type="email" placeholder="Enter your email" class="form-control narrow-input" name="email">
                     </div>
                     <div class="mb-3">
-                        <label for="InputPassword1" class="form-label">Password:</label>
-                        <input type="password" placeholder="*********" class="form-control narrow-input" id="InputPassword1">
+                        <label class="form-label">Password:</label>
+                        <input type="password" placeholder="*********" class="form-control narrow-input" name="password">
                         <a href="#" class="float-end pb-4">Forgot password</a>
                     </div>
                     <button type="submit" class="btn btn-success btn-signin">Sign in</button>
@@ -36,4 +36,4 @@
 
 
 
-    @endsection
+@endsection

@@ -5,7 +5,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col col1">
+        <div class="col col1" data-aos="zoom-in">
             <div class="container signin">
             @if ($errors->any())
                     <div class="col-12">
@@ -33,7 +33,7 @@
                     <div class="mb-3">
                         <label class="form-label">Password:</label>
                         <input type="password" placeholder="*********" class="form-control narrow-input" name="password">
-                        <a href="#" class="float-end pb-4">Forgot password</a>
+                        <a href="{{route("forget.password")}}" class="float-end pb-4">Forgot password</a>
                     </div>
                     <div class="g-recaptcha pb-5" data-sitekey="6LeKw8YoAAAAAJFV36rQPlijGksgNmascpiLfN7K"></div>
 
@@ -43,9 +43,9 @@
             </div>
         </div>
 
-        <div class="col col2">
-            <div class="container col2container">
-                <img src="{{ asset('images/piclogo.png') }}" />
+        <div class="col col2" >
+            <div class="container col2container" data-aos="zoom-in">
+                <img  src="{{ asset('images/piclogo.png') }}" />
             </div>
         </div>
     </div>

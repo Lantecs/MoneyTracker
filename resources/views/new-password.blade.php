@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col col1" data-aos="fade-in">
+        <div class="col col1" data-aos="fade-in">>
             <div class="container signin mt-5">
                 @if ($errors->any())
                     <div class="col-12">
@@ -22,17 +22,14 @@
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
 
-                <h3 class="fw-bold">Create new account</h3>
-                <p class="pb-3">Please enter your details:</p>
-                <form action="{{ route('registration.post') }}" method="POST" id="registrationForm" >
+                <h3 class="fw-bold">Reset Account Password!</h3>
+                <p class="pb-3">Please enter new password</p>
+                <form action="{{ route('reset.password.post') }}" method="POST">
                     @csrf
-                    <div class="mb-3">
-                        <label class="form-label" for="name">Full Name:</label>
-                        <input type="text" class="form-control narrow-input" id="name" name="name" placeholder="Enter your full name">
-                    </div>
+                    <input type="text" name="token" hidden value="{{$token}}">
                     <div class="mb-3">
                         <label class="form-label" for="email">Email:</label>
-                        <input type="email" class="form-control narrow-input" id="email" name="email" placeholder="Enter your active email">
+                        <input type="email" class="form-control narrow-input" id="email" name="email" placeholder="Enter your email">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="password">Password:</label>
@@ -42,10 +39,7 @@
                         <label class="form-label" for="password_confirmation">Confirm Password:</label>
                         <input type="password" class="form-control narrow-input" id="password" name="password_confirmation" placeholder="Confirm your password" required>
                     </div>
-                    <div class="g-recaptcha pb-3" data-sitekey="6LeKw8YoAAAAAJFV36rQPlijGksgNmascpiLfN7K"></div>
-
-                    <button type="submit" class="btn btn-success btn-signin">Sign up</button>
-                    <p class="text-center pt-2">Already have an account? <a href="{{route('login')}}">Sign in</a></p>
+                    <button type="submit" class="btn btn-success btn-resetpassword">Reset Password</button>
                 </form>
             </div>
         </div>

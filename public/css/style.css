@@ -11,7 +11,6 @@ body {
     width: 300px;
     color: black;
     background-color: #ADEF84;
-    /* Adjust the color and transparency as needed */
 }
 
 .signin {
@@ -29,7 +28,7 @@ body {
 
 .col2 {
     background-color: #FEE19D;
-    height: 745px;
+    height: 785px;
     display: grid;
     grid-auto-flow: column;
     align-items: center;

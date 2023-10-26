@@ -1,0 +1,2 @@
+<?php
+forget.password

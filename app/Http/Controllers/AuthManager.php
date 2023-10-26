@@ -30,11 +30,11 @@ class AuthManager extends Controller
     {
         $request->validate([
             'email' => 'required',
-            'password' => 'required | max:8',
+            'password' => 'required | min:8',
             'g-recaptcha-response' => 'required|captcha',
 
         ]);
-
+        
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended(route('home'));
@@ -48,7 +48,7 @@ class AuthManager extends Controller
             'name' => 'required|min:6',
             'email' => 'required|email|unique:users',
             'password' => 'min:8|max:255|required|confirmed',
-            'password_confirmation' => 'min:8|max:255',
+            'password_confirmation' => 'min:8|max:255|required',
             'g-recaptcha-response' => 'required|captcha',
         ]);
 

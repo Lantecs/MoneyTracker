@@ -23,6 +23,7 @@ class ForgetPasswordManager extends Controller
             'email' => 'required|email|exists:users',
         ]);
 
+
         $existingRecord = DB::table('password_resets')->where('email', $request->email)->first();
 
         if ($existingRecord) {

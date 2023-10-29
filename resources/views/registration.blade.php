@@ -4,15 +4,8 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col col1" data-aos="fade-in">
-            <div class="container signin mt-5">
-                @if ($errors->any())
-                    <div class="col-12">
-                        @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger">{{ $error }}</div>
-                        @endforeach
-                    </div>
-                @endif
+        <div class="col col1" data-aos="zoom-in">
+            <div class="container">
 
                 @if (session()->has('error'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
@@ -22,31 +15,56 @@
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
 
-                <h3 class="fw-bold">Create new account</h3>
-                <p class="pb-3">Please enter your details:</p>
-                <form action="{{ route('registration.post') }}" method="POST" id="registrationForm" >
-                    @csrf
-                    <div class="mb-3">
-                        <label class="form-label" for="name">Full Name:</label>
-                        <input type="text" class="form-control narrow-input" id="name" name="name" placeholder="Enter your full name">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="email">Email:</label>
-                        <input type="email" class="form-control narrow-input" id="email" name="email" placeholder="Enter your active email">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="password">Password:</label>
-                        <input type="password" class="form-control narrow-input @error('password') is-invalid @enderror" id="password" name="password" placeholder="Enter your password" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="password_confirmation">Confirm Password:</label>
-                        <input type="password" class="form-control narrow-input" id="password" name="password_confirmation" placeholder="Confirm your password" required>
-                    </div>
-                    <div class="g-recaptcha pb-3" data-sitekey="6LeKw8YoAAAAAJFV36rQPlijGksgNmascpiLfN7K"></div>
-
-                    <button type="submit" class="btn btn-success btn-signin">Sign up</button>
-                    <p class="text-center pt-2">Already have an account? <a href="{{route('login')}}">Sign in</a></p>
-                </form>
+                <div class="container signin mt-5">
+                    <h3 class="fw-bold">Create new account</h3>
+                    <p class="pb-3">Please enter your details:</p>
+                    <form action="{{ route('registration.post') }}" method="POST" id="registrationForm">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label" for="name">Full Name:</label>
+                            <input type="text" class="form-control narrow-input @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter your full name">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email:</label>
+                            <input type="email" class="form-control narrow-input @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter your active email">
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Password:</label>
+                            <input type="password" class="form-control narrow-input @error('password') is-invalid @enderror" id="password" name="password" placeholder="Enter your password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password_confirmation">Confirm Password:</label>
+                            <input type="password" class="form-control narrow-input @error('password') is-invalid @enderror" id="password" name="password_confirmation" placeholder="Confirm your password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        @if($errors->has('g-recaptcha-response'))
+                            <div class="g-recaptcha pb-5 captcha-container captcha" data-sitekey="6LeKw8YoAAAAAJFV36rQPlijGksgNmascpiLfN7K"></div>
+                        @else
+                            <div class="g-recaptcha pb-5 captcha-container" data-sitekey="6LeKw8YoAAAAAJFV36rQPlijGksgNmascpiLfN7K"></div>
+                        @endif
+                        <button type="submit" class="btn btn-success btn-signin">Sign up</button>
+                        <p class="text-center pt-2">Already have an account? <a href="{{ route('login') }}">Sign in</a></p>
+                    </form>
+                </div>
             </div>
         </div>
 

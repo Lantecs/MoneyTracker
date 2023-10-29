@@ -10,12 +10,15 @@ use Illuminate\Support\Facades\Session;
 
 class AuthManager extends Controller
 {
+
     function login()
     {
         if (Auth::check()) {
             return redirect(route('home'));
         }
+
         return view('login');
+
     }
 
     function registration()
@@ -29,12 +32,12 @@ class AuthManager extends Controller
     function loginPost(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|exists:users',
             'password' => 'required | min:8',
             'g-recaptcha-response' => 'required|captcha',
 
         ]);
-        
+
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended(route('home'));

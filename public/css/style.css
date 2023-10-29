@@ -19,16 +19,17 @@ body {
 }
 
 .col1 {
-    height: 745px;
-    display: grid;
-    grid-auto-flow: column;
+    display: flex;
+    justify-content: space-evenly;
+    height: 100vh;
+
     align-items: center;
     justify-items: center;
 }
 
 .col2 {
     background-color: #FEE19D;
-    height: 785px;
+    height: 100vh;
     display: grid;
     grid-auto-flow: column;
     align-items: center;
@@ -52,4 +53,17 @@ body {
 ::-webkit-input-placeholder {
     color: #ABABAB;
     font-style: italic;
+}
+
+.captcha iframe {
+    border: .5px solid red;
+    box-shadow: 0 0 5px 0 red;
+}
+
+.forgetpassword-container {
+    width: 350px;
+}
+
+.consign {
+    width: 350px;
 }

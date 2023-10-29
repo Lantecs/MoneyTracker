@@ -1,2 +1,2 @@
 <?php
-forget.password
+// forget.password

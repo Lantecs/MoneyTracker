@@ -20,8 +20,6 @@ body {
 
 .col1 {
     height: 745px;
-    display: grid;
-    grid-auto-flow: column;
     align-items: center;
     justify-items: center;
 }

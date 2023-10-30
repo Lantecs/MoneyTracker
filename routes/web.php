@@ -18,13 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
         return view('dashboard');
-    })->name('home');
+    })->name('dashboard');
 
     Route::get('/dashboard', function () {
-        return view('dashboard');})->name('dashboard');
+        return view('dashboard');
+    })->name('dashboard');
 
-        Route::get('/expenses', function () {
-            return view('expenses');})->name('expenses');
+    Route::get('/expenses', function () {
+        return view('expenses');
+    })->name('expenses');
 });
 
 

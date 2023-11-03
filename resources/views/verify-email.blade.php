@@ -16,8 +16,8 @@
                     @endif
 
                     <div class="container signin">
-                        <p class="pb-3">We will send a link to your email, use that link to reset the password.</p>
-                        <form action="{{ route('forget.password.post') }}" method="POST">
+                        <p class="pb-3">We will send a link to your email, use that link to verify your email.</p>
+                        <form action="{{ route('verify.email.post') }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label">Email:</label>
@@ -28,7 +28,7 @@
                                 </span>
                                 @enderror
                                 @if (session()->has('success'))
-                                    <p>Did not receive the email? <a href="{{ route('forget.password.post') }}">Resend</a></p>
+                                    <p>Did not receive the email? <a href="#">Resend</a></p>
                                 @endif
                             </div>
 

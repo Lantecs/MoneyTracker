@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Auth\Events\Registered;
 
 class AuthManager extends Controller
 {
+
 
     function login()
     {
@@ -62,7 +64,9 @@ class AuthManager extends Controller
         if (!$user) {
             return redirect(route('registration'))->with("error", "Registration failed, try again.");
         }
-        return redirect(route('login'))->with("success", "Registration success, Login to access the dashboard");
+
+
+    return redirect(route('login'))->with("success", "Registration success, Check your email for verification instructions.");
 
     }
 

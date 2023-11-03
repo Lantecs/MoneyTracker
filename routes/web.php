@@ -1,7 +1,13 @@
 <?php
 
 use App\Http\Controllers\AuthManager;
+<<<<<<< HEAD
 use App\Http\Controllers\ForgetPasswordManager;
+=======
+use App\Http\Controllers\EmailVerificationManager;
+use App\Http\Controllers\ForgetPasswordManager;
+use Illuminate\Support\Facades\Auth;
+>>>>>>> lanbert
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => 'auth'], function () {
+<<<<<<< HEAD
     Route::get('/', function () {
         return view('dashboard');
     })->name('home');
@@ -25,6 +32,15 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/expenses', function () {
             return view('expenses');})->name('expenses');
+=======
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('/expenses', function () {
+        return view('expenses');
+    })->name('expenses');
+>>>>>>> lanbert
 });
 
 
@@ -33,6 +49,25 @@ Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
 Route::get('/registration', [AuthManager::class, 'registration'])->name('registration');
 Route::post('/registration', [AuthManager::class, 'registrationPOST'])->name('registration.post');
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
+<<<<<<< HEAD
+=======
+
+Route::get("/forget-password", [ForgetPasswordManager::class, "forgetPassword"])
+    ->name("forget.password");
+Route::post("/forget-password", [ForgetPasswordManager::class, "forgetPasswordPost"])
+    ->name("forget.password.post");
+
+Route::get("/reset-password/{token}", [ForgetPasswordManager::class, "resetPassword"])
+    ->name("reset.password");
+Route::post("/reset-password", [ForgetPasswordManager::class, "resetPasswordPost"])
+    ->name("reset.password.post");
+
+Route::get("/verify-email", [EmailVerificationManager::class, "verifyEmail"])
+    ->name("verify.email");
+Route::get("/verify-email", [EmailVerificationManager::class, "verifyEmailPost"])
+    ->name("verify.email.post");
+
+>>>>>>> lanbert
 
 Route::get("/forget-password", [ForgetPasswordManager::class, "forgetPassword"])
     ->name("forget.password");

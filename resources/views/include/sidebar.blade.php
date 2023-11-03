@@ -9,7 +9,7 @@
         </button>
     </div>
 
-    <ul class="list-unstyled">
+    <ul class="list-unstyled px-2">
         <li class="{{ request()->is('dashboard*') ? 'active' : '' }}">
             <a href="{{ route('dashboard') }}" class="text-decoration-none px-3 py-2 d-block">
                 <i class="bi bi-house-door-fill"></i> Dashboard
@@ -71,14 +71,13 @@ border-right: 1px solid #DCD4D4;
 .sidebar li:hover{
     background: linear-gradient(to right, rgb(140, 239, 132), rgb(207, 236, 205), #fff2d3);
 
-     border: 1px solid #FEE19D;
+       border: 1px solid #FEE19D;
 }
 
 
 .sidebar li.active{
-background: linear-gradient(to right, rgb(140, 239, 132), rgb(207, 236, 205), #fff2d3);
-   /* border-radius: 8px ; */
-   border: 1px solid #FEE19D;
+    background: linear-gradient(to right, rgb(140, 239, 132), rgb(207, 236, 205), #fff2d3);
+   border-radius: 8px ;
 }
 
 .sidebar li a{

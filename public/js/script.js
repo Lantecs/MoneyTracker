@@ -1,6 +1,4 @@
 AOS.init();
-<<<<<<< HEAD
-=======
 
 $(".sidebar ul li").on('click', function () {
     $(".sidebar ul li.active").removeClass('active');
@@ -18,4 +16,3 @@ $('.close-btn').on('click', function () {
 
 })
 
->>>>>>> lanbert

@@ -28,7 +28,7 @@
                                 </span>
                                 @enderror
                                 @if (session()->has('success'))
-                                    <p>Did not receive the email? <a href="{{ route('forget.password.post') }}">Resend</a></p>
+                                    <p>Did not receive the email? <a href="#">Resend</a></p>
                                 @endif
                             </div>
 

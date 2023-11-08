@@ -23,7 +23,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'email_verified',
+        'verification_token',
     ];
+
+    public function getVerificationToken()
+{
+    return $this->verification_token;
+}
 
     /**
      * The attributes that should be hidden for serialization.

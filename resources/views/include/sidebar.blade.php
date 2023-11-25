@@ -76,7 +76,8 @@
 
     .sidebar li.active {
         background: linear-gradient(to right, rgb(140, 239, 132), rgb(207, 236, 205), #fff2d3);
-        border: 1px solid #FEE19D;
+        /* border: 1px solid #FEE19D; */
+   border: 1px solid #FEE19D;
     }
 
     .sidebar li a {

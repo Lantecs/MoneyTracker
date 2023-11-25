@@ -27,8 +27,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/expenses', function () {
         return view('expenses');
     })->name('expenses');
-});
 
+    Route::get('/summary', function () {
+        return view('summary');
+    })->name('summary');
+
+    Route::get('/budget', function () {
+        return view('budget');
+    })->name('budget');
+
+});
 
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
 Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');

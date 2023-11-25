@@ -24,20 +24,22 @@
                             <label class="form-label">Email:</label>
                             <input type="email" placeholder="Enter your email" class="form-control narrow-input @error('email') is-invalid @enderror" name="email">
                             @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password:</label>
                             <input type="password" placeholder="*********" class="form-control narrow-input @error('password') is-invalid @enderror" name="password">
                             @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
-                            <a href="{{ route('forget.password') }}" class="float-end pb-4">Forgot password</a>
+                            <div class="float-end">
+                            <a href="{{ route('forget.password') }}">Forgot password</a>
+                            </div>
                         </div>
 
                         @if($errors->has('g-recaptcha-response'))
@@ -58,6 +60,7 @@
         </div>
     </div>
 </div>
+
 
 
 

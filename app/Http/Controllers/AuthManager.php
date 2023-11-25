@@ -35,15 +35,19 @@ class AuthManager extends Controller
     {
         $request->validate([
             'email' => 'required|exists:users',
-            'password' => 'required | min:8',
+            'password' => 'required|min:8',
             'g-recaptcha-response' => 'required|captcha',
-
         ]);
 
         $credentials = $request->only('email', 'password');
+
         if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $token = $user->createToken($user->email)->plainTextToken;
+
             return redirect()->intended(route('dashboard'));
         }
+
         return redirect(route('login'))->with("error", "Login details are not valid");
     }
 

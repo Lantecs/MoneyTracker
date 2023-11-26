@@ -12,12 +12,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('verified_users', function (Blueprint $table) {
-            $table->id();
-            $table->string('email');
-            $table->string('token');
-            $table->timestamps();
-        });
+        // Schema::create('verified_users', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('email');
+        //     $table->string('token');
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -27,6 +27,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('verify_users');
+        // Schema::dropIfExists('verify_users');
     }
 };

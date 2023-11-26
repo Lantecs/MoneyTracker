@@ -36,16 +36,19 @@ class AuthManager extends Controller
         $request->validate([
             'email' => 'required|exists:users',
             'password' => 'required|min:8',
-            'g-recaptcha-response' => 'required|captcha',
+            // 'g-recaptcha-response' => 'required|captcha',
         ]);
 
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+
             $user = Auth::user();
+
             $token = $user->createToken($user->email)->plainTextToken;
 
             return redirect()->intended(route('dashboard'));
+
         }
 
         return redirect(route('login'))->with("error", "Login details are not valid");
@@ -73,10 +76,10 @@ class AuthManager extends Controller
             return redirect(route('registration'))->with("error", "Registration failed, try again.");
         }
 
-    Mail::send("emails.verify_email", ['token' => $data['verification_token']], function ($message) use ($request) {
-        $message->to($request->email);
-        $message->subject("Verify Email");
-    });
+        Mail::send("emails.verify_email", ['token' => $data['verification_token']], function ($message) use ($request) {
+            $message->to($request->email);
+            $message->subject("Verify Email");
+        });
 
         return redirect(route('login'))->with("success", "Registration Success! We have sent a link to verify your email.");
 
@@ -103,8 +106,12 @@ class AuthManager extends Controller
         return redirect()->route("login")->with("success", "Email Successfully Verified!");
     }
 
-    function logout()
+    function logout(Request $request)
     {
+        $request->user()->tokens()->delete();
+
+        $request->session()->regenerateToken();
+        $request->session()->invalidate();
         Session::flush();
         Auth::logout();
 

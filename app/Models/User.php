@@ -28,9 +28,9 @@ class User extends Authenticatable
     ];
 
     public function getVerificationToken()
-{
-    return $this->verification_token;
-}
+    {
+        return $this->verification_token;
+    }
 
     /**
      * The attributes that should be hidden for serialization.

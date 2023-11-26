@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('budget_type');
             $table->string('category');
             $table->decimal('amount');
+            $table->date('date');
             $table->timestamps();
             // $table->foreign('user_id')->references('id')->on('users');
         });

@@ -33,6 +33,10 @@
 
         <div class="dashboard-content px-3 pt-4">
             <h2 class="fs-5"> Dashboard</h2>
+            @php
+            $id = Auth::user()->id;
+            @endphp
+            <h1>{{ $id }}</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, totam? Sequi alias eveniet ut quas
                 ullam delectus et quasi incidunt rem deserunt asperiores reiciendis assumenda doloremque provident,
                 dolores aspernatur neque.</p>

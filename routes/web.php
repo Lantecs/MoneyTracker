@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BudgetController;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ForgetPasswordManager;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +37,13 @@ Route::group(['middleware' => 'auth'], function () {
         return view('budget');
     })->name('budget');
 
+    Route::get('/get-user-budgets', [BudgetController::class, 'getUserBudgets'])->name('get.user.budgets');
+    Route::post('/budgetadd', [BudgetController::class, 'budgetAdd'])->name('budget.add');
+    Route::delete('/budgetdelete/{id}', [BudgetController::class, 'budgetDelete'])->name('budget.delete');
+
+    Route::get('/budgetedit/{id}', [BudgetController::class, 'budgetEdit'])->name('budget.edit');
 });
+
 
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
 Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
@@ -57,5 +64,4 @@ Route::post("/reset-password", [ForgetPasswordManager::class, "resetPasswordPost
     ->name("reset.password.post");
 
 Route::get('/verify/{token}', [AuthManager::class, 'verifyPost'])->name('verify');
-
 

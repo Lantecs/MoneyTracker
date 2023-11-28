@@ -39,10 +39,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/get-user-budgets', [BudgetController::class, 'getUserBudgets'])->name('get.user.budgets');
     Route::post('/budgetadd', [BudgetController::class, 'budgetAdd'])->name('budget.add');
+    Route::get('/edit-user-budget/{id}', [BudgetController::class, 'budgetEdit'])->name('get.edit.budget');
+    Route::post('/budgetsave/{id}', [BudgetController::class, 'budgetSave'])->name('budget.save');
     Route::delete('/budgetdelete/{id}', [BudgetController::class, 'budgetDelete'])->name('budget.delete');
-
     Route::get('/budgetedit/{id}', [BudgetController::class, 'budgetEdit'])->name('budget.edit');
 });
+
+Route::get('/test_design', function () {
+    return view('test_design');
+})->name('test.design');
 
 
 Route::get('/login', [AuthManager::class, 'login'])->name('login');

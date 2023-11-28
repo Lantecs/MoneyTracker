@@ -3,17 +3,33 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BudgetRequest;
 use App\Models\UserBudgets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+
 
 class BudgetController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function getUserBudgets(Request $request)
+    public function getUserBudgets()
+    {
+        $user_id = auth()->user()->id;
+        $userBudgets = DB::table('user_budgets')
+            ->where('user_id', $user_id)
+            ->get();
+
+        return response()->json(['userBudgets' => $userBudgets]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function getRowBudgetData(Request $request)
     {
         $user_id = auth()->user()->id;
         $userBudgets = DB::table('user_budgets')
@@ -34,15 +50,18 @@ class BudgetController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-
     public function budgetAdd(Request $request)
     {
-        $request->validate([
-            'budget_type' => 'required|min:1',
+        $validator = Validator::make($request->all(), [
+            'budget_type' => 'required|min:3',
             'category' => 'required|in:Education,Entertainment,Food,Health,Miscellaneous,Shopping,Transportation,Utilities',
-            'amount' => 'min:1|required|numeric|between:0,999999.999999',
+            'amount' => 'required|numeric|between:0,999999.999999',
             'date' => 'required|date',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
 
         $user_id = auth()->user()->id;
 
@@ -54,8 +73,13 @@ class BudgetController extends Controller
 
         $budget = UserBudgets::create($data);
 
-        return redirect()->route('budget'); // Assuming you have a route named 'budget.showLogUserBudgets'
+        return response()->json(['success' => 'Budget added successfully']);
     }
+
+
+
+
+
 
 
 
@@ -70,35 +94,62 @@ class BudgetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function budgetEdit(string $id)
+    public function budgetEdit($id)
     {
+        $user_id = auth()->user()->id;
 
+        $budget = UserBudgets::where('user_id', $user_id)->find($id);
+
+        if (!$budget) {
+            return response()->json(['error' => 'Budget not found'], 404);
+        }
+
+        return response()->json(['budget' => $budget]);
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function budgetSave(Request $request, $id)
     {
-        $request->validate([
-            'budget_type' => 'required|min:1',
+        $validator = Validator::make($request->all(), [
+            'budget_type' => 'required|min:3',
             'category' => 'required|in:Education,Entertainment,Food,Health,Miscellaneous,Shopping,Transportation,Utilities',
-            'amount' => 'min:1|required|numeric|between:0,999999.999999',
+            'amount' => 'required|numeric|between:0,999999.999999',
             'date' => 'required|date',
         ]);
 
         $user_id = auth()->user()->id;
 
-        $data['user_id'] = $user_id;
-        $data['budget_type'] = $request->budget_type;
-        $data['category'] = $request->category;
-        $data['amount'] = $request->amount;
-        $data['date'] = Carbon::parse($request->date)->format('Y-m-d');
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
 
-        $budget = UserBudgets::create($data);
+        // Retrieve the budget using first() to execute the query
+        $budget = UserBudgets::where('user_id', $user_id)
+            ->where('budget_id', $id)
+            ->first();
 
-        return redirect()->route('budget');
+        if (!$budget) {
+            // Handle the case where the budget is not found, for example, redirect back
+            return redirect()->back()->with('error', 'Budget not found');
+        }
+
+        // Update the budget with the new data
+// Update the budget with the new data
+        $budget->budget_type = $request->budget_type;
+        $budget->category = $request->category;
+        $budget->amount = $request->amount;
+        $budget->date = Carbon::parse($request->date)->format('Y-m-d');
+
+
+        $budget->save();
+
+        return response()->json(['success' => 'Budget updated successfully']);
     }
+
+
 
     /**
      * Remove the specified resource from storage.

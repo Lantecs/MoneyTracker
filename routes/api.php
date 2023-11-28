@@ -25,4 +25,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
+Route::post('/budgetadd', [BudgetController::class, 'budgetAdd'])->name('budget.add');
 
+Route::post('/budgetsave/{id}', [BudgetController::class, 'budgetSave'])->name('budget.save');

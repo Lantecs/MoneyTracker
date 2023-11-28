@@ -22,10 +22,10 @@ class BudgetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'budget-type' => 'required|min:1|max:255',
-            'category' => 'required|min:1|max:255',
-            'amount' => 'min:1|max:255|required|',
-            'date' => 'min:1|required|date',
+            'edit_budget_type' => 'required|min:1',
+            'edit_category' => 'required|in:Education,Entertainment,Food,Health,Miscellaneous,Shopping,Transportation,Utilities',
+            'edit_amount' => 'min:1|required|numeric|between:0,999999.999999',
+            'edit_date' => 'required|date',
         ];
     }
 }

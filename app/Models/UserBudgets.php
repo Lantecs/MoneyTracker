@@ -15,6 +15,10 @@ class UserBudgets extends Model
      */
     protected $table = 'user_budgets';
 
+    public $timestamps = true;
+    protected $guarded = [];
+
+
     /**
      * The primary key associated with the table.
      *

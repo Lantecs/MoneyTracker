@@ -7,9 +7,17 @@
     @include('include/sidebar')
     <div class="content">
 
-        
+        <div class="modal fade" id="sucessModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="container successCon text-center d-flex justify-content-center align-item-center">
+                    <div class="alert alert-success" role="alert">
+                        This is a danger alert—check it out!
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sucessModal">
             Launch demo modal
         </button>
 

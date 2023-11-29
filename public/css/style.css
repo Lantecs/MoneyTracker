@@ -1,5 +1,5 @@
 body {
-    font-family: 'Amiri';
+    font-family: 'inter';
 
 }
 
@@ -20,9 +20,7 @@ body {
 
 .col1 {
     display: flex;
-    justify-content: space-evenly;
     height: 100vh;
-
     align-items: center;
     justify-items: center;
 }

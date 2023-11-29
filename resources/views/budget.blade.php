@@ -1,190 +1,204 @@
 @extends('layout')
-@section('title', "Budget")
+@section('title', 'Budget')
 @section('content')
 
-<div class="main-container d-flex">
-    @include('include/sidebar')
-    <div class="content">
+    <div class="main-container d-flex">
+        @include('include/sidebar')
+        <div class="content">
 
-        <!-- <div id="errorMessages" class="alert alert-danger" style="display:none;">
-            <ul id="errorList"></ul>
-        </div> -->
+            <!-- <div id="errorMessages" class="alert alert-danger" style="display:none;">
+                                                                <ul id="errorList"></ul>
+                                                            </div> -->
 
-        <div class="pt-5 modal fade" id="editModal" tabindex="1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Edit Budget</h5>
-                        <button type="button" style="background-color: transparent; border: none;" class="close"
-                            data-dismiss="modal" aria-label="Close">
-                            <i class="bi bi-x-lg"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body" id="editForm">
+            <div class="modal fade pt-5" id="sucessModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="container successCon text-center d-flex justify-content-center align-item-center">
+                        <div class="alert alert-success" id="successMessage" role="alert">
 
-                        <!-- Modal Content -->
-
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div class="pt-5 modal fade" id="editModal" tabindex="1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Budget</h5>
+                            <button type="button" style="background-color: transparent; border: none;" class="close"
+                                data-dismiss="modal" aria-label="Close">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+
+                        <div class="modal-body" id="editForm">
+
+                            <!-- Modal Content -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
-        <div class="dashboard-content pt-2 ">
-            <h2 class="ps-5 pb-1 text-budget">Budget</h2>
-            <div class="container-fluid outside">
-                <div class="box">
+            <div class="dashboard-content">
+                <h2 class="ps-5 text-budget">Budget</h2>
+                <div class="container-fluid outside">
+                    <div class="box">
+                        <div class="align">
+                            <div class="container">
+                                <h2 class="pt-3 text-budget-plan">Budget Plan</h2>
+                                <hr class="hr-line">
+                                <h2 class="text-budget-plan">Input budget for a specific Date:</h2>
+                            </div>
+                            <div class="container">
+                                <form id="budgetAddForm" class="needs-validation" novalidate>
+                                    <div class="row">
+                                        <div class="col colheight">
+                                            <label for="budget_type" class="labelColor pb-1">Budget type:</label><br>
+                                            <input type="text" class="form-control inputSize" name="budget_type"
+                                                required>
+
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+
+
+                                            <span class="validation-error-color" id="budget_type_error" role="alert">
+                                                {{ $errors->first('budget_type') }}
+                                            </span>
+
+                                            <br>
+
+                                            <label for="category" class="labelColor">Category:</label><br>
+                                            <select id="category" class="form-select inputCategory" name="category">
+                                                <option value="none" selected disabled hidden>-- Select an Option --
+                                                </option>
+                                                <option value="Education">Education</option>
+                                                <option value="Entertainment">Entertainment</option>
+                                                <option value="Food">Food</option>
+                                                <option value="Health">Health</option>
+                                                <option value="Miscellaneous">Miscellaneous</option>
+                                                <option value="Shopping">Shopping</option>
+                                                <option value="Transportation">Transportation</option>
+                                                <option value="Utilities">Utilities</option>
+
+                                            </select>
+                                            <span class="validation-error-color" id="category_error" data-aos="fade-in">
+                                                {{ $errors->first('category') }}
+                                            </span>
+
+
+
+                                        </div>
+                                        <div class="col-lg-2"></div>
+
+                                        <div class="col colheight">
+
+                                            <label for="budget_type" class="labelColor">Amount:</label><br>
+                                            <div class="input-group amount">
+                                                <input id="amount" type="text" class="form-control inpamount"
+                                                    name="amount">
+                                            </div>
+                                            <span class="validation-error-color" id="amount_error">
+                                                {{ $errors->first('amount') }}
+                                            </span>
+                                            <br>
+
+
+                                            <label for="budget_type" class="labelColor pt-1">Date:</label><br>
+                                            <div class="input-group date">
+                                                <input id="picker" type="text" class="form-control inpdate" readonly
+                                                    name="date">
+
+                                            </div>
+                                            <span class="validation-error-color" id="date_error">
+                                                {{ $errors->first('date') }}
+                                            </span>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row justify-content-end pb-2">
+                                        <button type="button" onclick="addBudget()" class="add">Add</button>
+                                    </div>
+
+                                    <div id="errorMessages" class="alert alert-danger" style="display:none;">
+                                        <ul id="errorList"></ul>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid outside pt-3">
+                <div class="boxbelow">
                     <div class="align">
-                        <div class="container">
-                            <h2 class="pt-3 text-budget-plan">Budget Plan</h2>
-                            <hr class="hr-line">
-                            <h2 class="text-budget-plan">Input budget for a specific Date:</h2>
-                        </div>
-                        <div class="container">
-                            <form id="budgetAddForm" class="needs-validation" novalidate>
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="budget_type" class="labelColor pb-1">Budget type:</label><br>
-                                        <input type="text" class="form-control inputSize" name="budget_type" required>
+                        <div class="box2 text-center pt-3">
+                            <div class="row row1 pt-4">
+                                <div class="col colum1">
+                                    <h4>Budget Type</h4>
+                                </div>
+                                <div class="col colum2">
+                                    <h4 class="grey">Category</h4>
+                                </div>
+                                <div class="col colum3">
+                                    <h4 class="amountalign">Amount</h4>
+                                </div>
+                                <div class="col colum4">
+                                    <h4 class="grey datealign">Date</h4>
+                                </div>
+                            </div>
 
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>
+                            <div class="container scrollbar">
 
+                                <!-- container of loaded budgets of user -->
 
-                                        <span class="validation-error-color" id="budget_type_error" role="alert">
-                                            {{ $errors->first('budget_type') }}
-                                        </span>
-
-                                        <br>
-
-                                        <label for="category" class="labelColor">Category:</label><br>
-                                        <select id="category" class="form-select inputCategory" name="category">
-                                            <option value="none" selected disabled hidden>-- Select an Option --
-                                            </option>
-                                            <option value="Education">Education</option>
-                                            <option value="Entertainment">Entertainment</option>
-                                            <option value="Food">Food</option>
-                                            <option value="Health">Health</option>
-                                            <option value="Miscellaneous">Miscellaneous</option>
-                                            <option value="Shopping">Shopping</option>
-                                            <option value="Transportation">Transportation</option>
-                                            <option value="Utilities">Utilities</option>
-
-                                        </select>
-                                        <span class="validation-error-color" id="category_error">
-                                            {{ $errors->first('category') }}
-                                        </span>
-
-
-
+                                <div class="pt-5 d-flex justify-content-center align-items-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="visually-hidden">Loading...</span>
                                     </div>
-                                    <div class="col-lg-2"></div>
-
-                                    <div class="col">
-
-                                        <label for="budget_type" class="labelColor">Amount:</label><br>
-                                        <div class="input-group amount">
-                                            <input id="amount" type="text" class="form-control inpamount" name="amount">
-                                        </div>
-                                        <span class="validation-error-color" id="amount_error">
-                                            {{ $errors->first('amount') }}
-                                        </span>
-                                        <br>
-
-
-                                        <label for="budget_type" class="labelColor pt-1">Date:</label><br>
-                                        <div class="input-group date">
-                                            <input id="picker" type="text" class="form-control inpdate" readonly
-                                                name="date">
-
-                                        </div>
-                                        <span class="validation-error-color" id="date_error">
-                                            {{ $errors->first('date') }}
-                                        </span>
-
-                                    </div>
+                                    <b class="ms-2">Loading Data...</b>
                                 </div>
 
-                                <div class="row justify-content-end pt-2 pb-2">
-                                    <button type="button" onclick="addBudget()" class="add">Add</button>
-                                </div>
+                            </div>
 
-                                <div id="errorMessages" class="alert alert-danger" style="display:none;">
-                                    <ul id="errorList"></ul>
-                                </div>
 
-                            </form>
                         </div>
-
+                        <div class="row rowbotborder"></div>
                     </div>
                 </div>
             </div>
+
         </div>
-
-        <div class="container-fluid outside pt-3">
-            <div class="boxbelow">
-                <div class="align">
-                    <div class="box2 text-center pt-3">
-                        <div class="row row1 pt-4">
-                            <div class="col colum1">
-                                <h4>Budget Type</h4>
-                            </div>
-                            <div class="col colum2">
-                                <h4 class="grey">Category</h4>
-                            </div>
-                            <div class="col colum3">
-                                <h4 class="amountalign">Amount</h4>
-                            </div>
-                            <div class="col colum4">
-                                <h4 class="grey datealign">Date</h4>
-                            </div>
-                        </div>
-
-                        <div class="container scrollbar">
-
-                            <!-- container of loaded budgets of user -->
-
-                            <div class="pt-5 d-flex justify-content-center align-items-center">
-                                <div class="spinner-border" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                                <b class="ms-2">Loading Data...</b>
-                            </div>
-
-                        </div>
-
-
-                    </div>
-                    <div class="row rowbotborder"></div>
-                </div>
-            </div>
-        </div>
-
     </div>
-</div>
-
+@endsection
 
 
 <script>
     loadUserBudgets();
-
 
     function saveEditedBudget(budgetId) {
         const form = document.getElementById('budgetSaveForm');
         const formData = new FormData(form);
 
         fetch(`/budgetsave/${String(budgetId)}`, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                'Accept': 'application/json',
-            },
-        })
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json',
+                },
+            })
+
             .then(response => response.json())
             .then(data => {
+                clearErrors();
                 console.log(data);
 
                 if (data.errors) {
@@ -205,6 +219,11 @@
 
                         const inputField = document.querySelector(`[name="${field}"]`);
                         inputField.classList.add('is-invalid');
+                        inputField.style.border = "1px solid #ff3333";
+                        setTimeout(() => {
+                            clearErrors();
+                            inputField.style.border = "1px solid #000000";
+                        }, 5000);
 
                         const errorSpan = document.getElementById(`${field}_error`);
                         if (errorSpan) {
@@ -213,29 +232,41 @@
                     });
                 } else {
 
-                    console.log('Form submitted successfully');
+
+                    console.log('Data changes successfully save.');
+
+                    const successMessage = document.getElementById('successMessage');
+                    if (successMessage) {
+                        successMessage.textContent = 'Data changes successfully save.';
+                    }
+
+                    $('#sucessModal').modal({
+                        backdrop: false,
+                        show: true
+                    });
 
                     $('#editModal').modal('hide');
+
                     loadUserBudgets();
+                    setTimeout(() => {
+                        $('#sucessModal').modal('hide');
+                    }, 2000);
                 }
 
             })
             .catch(error => {
                 console.error('Validation Errors:', error.errors);
-
             });
     }
-
-
-
-
-
 
     async function addBudget() {
         const form = document.getElementById('budgetAddForm');
         const formData = new FormData(form);
 
         clearErrors();
+        setTimeout(() => {
+            clearErrors();
+        }, 5000);
 
         try {
             const response = await fetch('/budgetadd', {
@@ -250,15 +281,12 @@
             const data = await response.json();
             console.log('Response Data:', data);
 
-
             if (data.errors) {
                 console.error('Validation Errors:', data.errors);
-
 
                 Object.keys(data.errors).forEach(field => {
                     console.error(`Field: ${field}, Error: ${data.errors[field][0]}`);
                 });
-
 
                 Object.keys(data.errors).forEach(field => {
                     const errorMessages = data.errors[field].join(', ');
@@ -276,16 +304,31 @@
                     }
                 });
             } else {
+                console.log('Successfully Added!');
 
-                console.log('Form submitted successfully');
-                form.reset();
-                loadUserBudgets();
+                const successMessage = document.getElementById('successMessage');
+                if (successMessage) {
+                    successMessage.textContent = 'Successfully Added!';
+                }
+
+                $('#sucessModal').modal({
+                    backdrop: false,
+                    show: true
+                });
+
+                $('#editModal').modal('hide');
+
+                setTimeout(() => {
+                    $('#sucessModal').modal('hide');
+                }, 2000);
             }
+            form.reset();
+            loadUserBudgets();
         } catch (error) {
-            console.error('Validation Errors:', data);
-
+            console.error('An error occurred:', error);
         }
     }
+
 
     function clearErrors() {
 
@@ -313,12 +356,12 @@
     function openEditModal(budgetId) {
 
         fetch(`/edit-user-budget/${budgetId}`, {
-            method: 'GET',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                method: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
 
-            },
-        })
+                },
+            })
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -337,12 +380,10 @@
                                 <label for="budget_type" class="">Budget type:</label><br>
                                 <input type="text" style="        background-color: transparent;
                                   border: 1px solid black;"
-                                    class="form-control inputSize @error('budget_type') is-invalid @enderror"
-                                    name="budget_type" value="${editBudget.budget_type}">
+                                    class="form-control inputSize"
+                                    name="edited_budget_type" value="${editBudget.budget_type}">
 
-                            <span class="validation-error-color" id="budget_type_error">
-                                            {{ $errors->first('budget_type') }}
-                                        </span>
+
 
                             <br>
 
@@ -351,7 +392,7 @@
                                 <select value="${editBudget.category}" id="category" style="        background-color: transparent;
                                      border: 1px solid black;"
                                     class="form-select inputCategory"
-                                    name="category">
+                                    name="edited_category">
                                     <option value="${editBudget.category}" selected hidden>${editBudget.category}</option>
                                     <option value="Education">Education</option>
                                     <option value="Entertainment">Entertainment</option>
@@ -362,23 +403,16 @@
                                     <option value="Transportation">Transportation</option>
                                     <option value="Utilities">Utilities</option>
                                 </select>
-                                <span class="validation-error-color" id="category_error">
-                                            {{ $errors->first('category') }}
-                                        </span>
+
 
                             <br>
                             <label for="budget_type" class="">Amount:</label><br>
                             <div class="input-group amount">
                                 <input style="background-color: transparent;
                                 border: 1px solid black;" id="amount" type="text" class="form-control inpamount ps-4"
-                                    name="amount" value="${editBudget.amount}">
+                                    name="edited_amount" value="${editBudget.amount}">
                             </div>
-                            <span class="validation-error-color" id="amount_error">
-                                {{ $errors->first('amount') }}
-                            </span>
-                            <span class="validation-error-color" id="date_error">
-                                            {{ $errors->first('amount') }}
-                                        </span>
+
                             <br>
 
 
@@ -389,11 +423,9 @@
                                     <input style="background-color: transparent;
                                         border: 1px solid black;"
                                         value="${moment(editBudget.date).format('DD-MM-YYYY')}" type="text"
-                                        class="form-control inpdate " readonly name="date" id="picker" />
+                                        class="form-control inpdate " readonly name="edited_date" id="picker" />
                                 </div>
-                                <span class="validation-error-color" id="date_error">
-                                            {{ $errors->first('date') }}
-                                        </span>
+
 
 
                             <br>
@@ -429,11 +461,11 @@
         const budgetId = button.dataset.budgetId;
 
         fetch(`http://moneytracker.test/budgetdelete/${budgetId}`, {
-            method: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            },
-        })
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+            })
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -451,11 +483,11 @@
 
     function loadUserBudgets() {
         fetch('http://moneytracker.test/get-user-budgets', {
-            method: 'GET',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            },
-        })
+                method: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+            })
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -513,14 +545,16 @@
     function ucfirst(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
-
-
 </script>
 
 
 
 
 <style>
+    .colheight {
+        height: 175px;
+    }
+
     /* Handle */
     ::-webkit-scrollbar-thumb {
         background: #8CEF84;
@@ -570,7 +604,7 @@
     }
 
     .validation-error-color {
-        color: red;
+        color: #c00000;
     }
 
     .textdate {

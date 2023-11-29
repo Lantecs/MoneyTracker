@@ -22,10 +22,24 @@ class BudgetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'edit_budget_type' => 'required|min:1',
-            'edit_category' => 'required|in:Education,Entertainment,Food,Health,Miscellaneous,Shopping,Transportation,Utilities',
-            'edit_amount' => 'min:1|required|numeric|between:0,999999.999999',
-            'edit_date' => 'required|date',
+            'budget_type' => 'required|min:3',
+            'category' => 'required|in:Education,Entertainment,Food,Health,Miscellaneous,Shopping,Transportation,Utilities',
+            'amount' => 'required|numeric|between:0,999999.999999',
+            'date' => 'required|date',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'budget_type.required' => 'Hey! this is empty.',
+            'body.required' => 'A message is required',
+            'budget_type.min' => 'A minimum of 3 letters if required',
         ];
     }
 }

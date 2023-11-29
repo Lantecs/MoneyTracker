@@ -50,17 +50,13 @@ class BudgetController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function budgetAdd(Request $request)
+    public function budgetAdd(BudgetRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'budget_type' => 'required|min:3',
-            'category' => 'required|in:Education,Entertainment,Food,Health,Miscellaneous,Shopping,Transportation,Utilities',
-            'amount' => 'required|numeric|between:0,999999.999999',
-            'date' => 'required|date',
-        ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+        $validated = $request->validated();
+
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()], 422);
         }
 
         $user_id = auth()->user()->id;
@@ -75,14 +71,6 @@ class BudgetController extends Controller
 
         return response()->json(['success' => 'Budget added successfully']);
     }
-
-
-
-
-
-
-
-
 
     /**
      * Display the specified resource.
@@ -113,18 +101,14 @@ class BudgetController extends Controller
      */
     public function budgetSave(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'budget_type' => 'required|min:3',
-            'category' => 'required|in:Education,Entertainment,Food,Health,Miscellaneous,Shopping,Transportation,Utilities',
-            'amount' => 'required|numeric|between:0,999999.999999',
-            'date' => 'required|date',
+        $request->validate([
+            'edited_budget_type' => 'required|min:3',
+            'edited_category' => 'required|in:Education,Entertainment,Food,Health,Miscellaneous,Shopping,Transportation,Utilities',
+            'edited_amount' => 'required|numeric|between:0,999999.999999',
+            'edited_date' => 'required|date',
         ]);
 
         $user_id = auth()->user()->id;
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
 
         // Retrieve the budget using first() to execute the query
         $budget = UserBudgets::where('user_id', $user_id)
@@ -137,11 +121,10 @@ class BudgetController extends Controller
         }
 
         // Update the budget with the new data
-// Update the budget with the new data
-        $budget->budget_type = $request->budget_type;
-        $budget->category = $request->category;
-        $budget->amount = $request->amount;
-        $budget->date = Carbon::parse($request->date)->format('Y-m-d');
+        $budget->budget_type = $request->edited_budget_type;
+        $budget->category = $request->edited_category;
+        $budget->amount = $request->edited_amount;
+        $budget->date = Carbon::parse($request->edited_date)->format('Y-m-d');
 
 
         $budget->save();

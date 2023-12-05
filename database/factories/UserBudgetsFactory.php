@@ -16,7 +16,7 @@ class UserBudgetsFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => 21,
+            'user_id' => 1,
             // 'user_id' => User::factory()->create()->id,  // Create a new user and use its ID
             'budget_type' => $this->faker->text(10), // Use the faker property of the Factory instance
             'category' => $this->faker->randomElement(['Education', 'Entertainment', 'Food', 'Health', 'Miscellaneous', 'Shopping', 'Transportation', 'Utilities']),

@@ -2,29 +2,30 @@
 @section('title', 'Budget')
 @section('content')
 
+    <!-- Main container -->
     <div class="main-container d-flex">
+        <!-- Include sidebar -->
         @include('include/sidebar')
+
         <div class="content">
-
-            <!-- <div id="errorMessages" class="alert alert-danger" style="display:none;">
-                                                                <ul id="errorList"></ul>
-                                                            </div> -->
-
+            <!-- Success Modal -->
             <div class="modal fade pt-5" id="sucessModal" tabindex="-1">
+                <!-- Modal dialog -->
                 <div class="modal-dialog">
                     <div class="container successCon text-center d-flex justify-content-center align-item-center">
-                        <div class="alert alert-success" id="successMessage" role="alert">
-
-                        </div>
+                        <!-- Alert for success message -->
+                        <div class="alert alert-success" id="successMessage" role="alert"></div>
                     </div>
                 </div>
             </div>
 
+            <!-- Edit Modal -->
             <div class="pt-5 modal fade" id="editModal" tabindex="1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Edit Budget</h5>
+                            <!-- Close button -->
                             <button type="button" style="background-color: transparent; border: none;" class="close"
                                 data-dismiss="modal" aria-label="Close">
                                 <i class="bi bi-x-lg"></i>
@@ -32,18 +33,17 @@
                         </div>
 
                         <div class="modal-body" id="editForm">
-
                             <!-- Modal Content -->
-
                         </div>
                     </div>
                 </div>
             </div>
 
-
-
+            <!-- Dashboard Content -->
             <div class="dashboard-content">
                 <h2 class="ps-5 text-budget">Budget</h2>
+
+                <!-- Budget Plan Form -->
                 <div class="container-fluid outside">
                     <div class="box">
                         <div class="align">
@@ -52,29 +52,18 @@
                                 <hr class="hr-line">
                                 <h2 class="text-budget-plan">Input budget for a specific Date:</h2>
                             </div>
+
+                            <!-- Budget Plan Form -->
                             <div class="container">
                                 <form id="budgetAddForm" class="needs-validation" novalidate>
+                                    <!-- Form fields for budget input -->
                                     <div class="row">
+                                        <!-- First column -->
                                         <div class="col colheight">
-                                            <label for="budget_type" class="labelColor pb-1">Budget type:</label><br>
-                                            <input type="text" class="form-control inputSize" name="budget_type"
-                                                required>
-
-                                            <div class="valid-feedback">
-                                                Looks good!
-                                            </div>
-
-
-                                            <span class="validation-error-color" id="budget_type_error" role="alert">
-                                                {{ $errors->first('budget_type') }}
-                                            </span>
-
-                                            <br>
-
+                                            <!-- Category dropdown -->
                                             <label for="category" class="labelColor">Category:</label><br>
                                             <select id="category" class="form-select inputCategory" name="category">
-                                                <option value="none" selected disabled hidden>-- Select an Option --
-                                                </option>
+                                                <option value="" disabled selected>-- Select an Option --</option>
                                                 <option value="Education">Education</option>
                                                 <option value="Entertainment">Entertainment</option>
                                                 <option value="Food">Food</option>
@@ -83,98 +72,104 @@
                                                 <option value="Shopping">Shopping</option>
                                                 <option value="Transportation">Transportation</option>
                                                 <option value="Utilities">Utilities</option>
-
                                             </select>
                                             <span class="validation-error-color" id="category_error" data-aos="fade-in">
                                                 {{ $errors->first('category') }}
                                             </span>
 
+                                            <br>
 
-
+                                            <!-- Budget type input -->
+                                            <label for="budget_type" class="labelColor pb-1">Budget type:</label><br>
+                                            <input type="text" class="form-control inputSize" name="budget_type"
+                                                required>
+                                            <span class="validation-error-color" id="budget_type_error" role="alert">
+                                                {{ $errors->first('budget_type') }}
+                                            </span>
                                         </div>
+
+                                        <!-- Spacer column -->
                                         <div class="col-lg-2"></div>
 
+                                        <!-- Second column -->
                                         <div class="col colheight">
-
+                                            <!-- Amount input -->
                                             <label for="budget_type" class="labelColor">Amount:</label><br>
                                             <div class="input-group amount">
-                                                <input id="amount" type="text" class="form-control inpamount"
-                                                    name="amount">
+                                                <input id="amount" type="text" style="text-indent: 10px;"
+                                                    class="form-control inpamount" name="amount">
                                             </div>
                                             <span class="validation-error-color" id="amount_error">
                                                 {{ $errors->first('amount') }}
                                             </span>
                                             <br>
 
-
+                                            <!-- Date input -->
                                             <label for="budget_type" class="labelColor pt-1">Date:</label><br>
                                             <div class="input-group date">
                                                 <input id="picker" type="text" class="form-control inpdate" readonly
                                                     name="date">
-
                                             </div>
                                             <span class="validation-error-color" id="date_error">
                                                 {{ $errors->first('date') }}
                                             </span>
-
                                         </div>
                                     </div>
 
-                                    <div class="row justify-content-end pb-2">
-                                        <button type="button" onclick="addBudget()" class="add">Add</button>
+                                    <!-- Add button -->
+                                    <div class="row justify-content-center pb-2">
+                                        <button type="button"
+                                            style="background: #8CEF84; border-radius: 8px; border: none; width: 300px"
+                                            onclick="addBudget()" class="add">Add</button>
                                     </div>
 
+                                    <!-- Error messages -->
                                     <div id="errorMessages" class="alert alert-danger" style="display:none;">
                                         <ul id="errorList"></ul>
                                     </div>
-
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="container-fluid outside pt-3">
-                <div class="boxbelow">
-                    <div class="align">
-                        <div class="box2 text-center pt-3">
-                            <div class="row row1 pt-4">
-                                <div class="col colum1">
-                                    <h4>Budget Type</h4>
-                                </div>
-                                <div class="col colum2">
-                                    <h4 class="grey">Category</h4>
-                                </div>
-                                <div class="col colum3">
-                                    <h4 class="amountalign">Amount</h4>
-                                </div>
-                                <div class="col colum4">
-                                    <h4 class="grey datealign">Date</h4>
-                                </div>
-                            </div>
-
-                            <div class="container scrollbar">
-
-                                <!-- container of loaded budgets of user -->
-
-                                <div class="pt-5 d-flex justify-content-center align-items-center">
-                                    <div class="spinner-border" role="status">
-                                        <span class="visually-hidden">Loading...</span>
+                <!-- Budget Display -->
+                <div class="container-fluid outside pt-3">
+                    <div class="boxbelow">
+                        <div class="align">
+                            <div class="box2 text-center pt-3">
+                                <div class="row row1 pt-4">
+                                    <!-- Column headers -->
+                                    <div class="col colum1">
+                                        <h4>Category</h4>
                                     </div>
-                                    <b class="ms-2">Loading Data...</b>
+                                    <div class="col colum2">
+                                        <h4 class="grey">Budget Type</h4>
+                                    </div>
+                                    <div class="col colum3">
+                                        <h4 class="amountalign">Amount</h4>
+                                    </div>
+                                    <div class="col colum4">
+                                        <h4 class="grey datealign">Date</h4>
+                                    </div>
+                                    <div class="col"></div>
                                 </div>
 
+                                <div class="container scrollbar">
+                                    <!-- Loading message -->
+                                    <div class="pt-5 d-flex justify-content-center align-items-center">
+                                        <div class="spinner-border" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <b class="ms-2">Loading Data...</b>
+                                    </div>
+                                </div>
                             </div>
-
-
+                            <div class="row rowbotborder"></div>
                         </div>
-                        <div class="row rowbotborder"></div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection
@@ -187,12 +182,14 @@
         const form = document.getElementById('budgetSaveForm');
         const formData = new FormData(form);
 
-        fetch(`/budgetsave/${String(budgetId)}`, {
+        
+
+        fetch(`/budgetsave/${budgetId}`, {
                 method: 'POST',
                 body: formData,
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Accept': 'application/json',
+                    Accept: 'application/json',
                 },
             })
 
@@ -359,7 +356,7 @@
                 method: 'GET',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
-
+                    Accept: 'application/json',
                 },
             })
             .then(response => {
@@ -420,10 +417,10 @@
 
                                 <label for="date" class="">Date:</label><br>
                                 <div class="input-group date">
-                                    <input style="background-color: transparent;
+                                    <input data-provide="datepicker" style="background-color: transparent;
                                         border: 1px solid black;"
                                         value="${moment(editBudget.date).format('DD-MM-YYYY')}" type="text"
-                                        class="form-control inpdate " readonly name="edited_date" id="picker" />
+                                        class="form-control inpdate datepicker" readonly name="edited_date" id="datepicker" />
                                 </div>
 
 
@@ -457,13 +454,14 @@
     }
 
 
-    function deleteBudget(button) {
-        const budgetId = button.dataset.budgetId;
+    function deleteBudget(budgetIdDelete) {
+        const budgetId = budgetIdDelete.dataset.budgetId;
 
         fetch(`http://moneytracker.test/budgetdelete/${budgetId}`, {
                 method: 'DELETE',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: 'application/json',
                 },
             })
             .then(response => {
@@ -486,6 +484,7 @@
                 method: 'GET',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: 'application/json',
                 },
             })
             .then(response => {
@@ -503,32 +502,33 @@
                     const row = document.createElement('div');
                     row.classList.add('row', 'row1', 'pt-4');
                     row.innerHTML = `
-
-                    <div class="col colum1">
-                        <h4>${ucfirst(budget.budget_type)}</h4>
-                    </div>
                     <div class="col colum2">
                         <h4 class="grey">${budget.category}</h4>
                     </div>
+                    <div class="col colum1 text-break">
+                        <h4>${ucfirst(budget.budget_type)}</h4>
+                    </div>
                     <div class="col colum3">
-                        <h4 class="pl-5">&#8369;${budget.amount}</h4>
+                        <h4 class="pl-5 text-break">&#8369;${budget.amount}</h4>
                     </div>
                     <div class="col colum4 d-flex">
                         <h4 class="grey">${moment(budget.date).format('DD-MM-YYYY')}</h4>
-                        <div class="dropdown pt-1">
-                        <button style="color: #80AC64; border:1px solid #80AC64; background: #F1F1F1;"
-                            class="btn dropdown-toggle butdrop" type="button" id="dropdownMenu2"
+                    </div>
+                    <div class="col colum5 text-center justify-content-center d-flex">
+                    <div class="dropdown pt-1">
+                            <button style="color: #80AC64; border:1px solid #80AC64; background: #F1F1F1;"
+                            class="btn dropdown-toggle butdrop d-flex float-end" type="button" id="dropdownMenu2"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
 
-                        <div style="background:#ECFAE2;border: 1px solid black;border-radius: 10px;"
+                            <div style="background:#ECFAE2;border: 1px solid black;border-radius: 10px;"
                             class="dropdown-menu" aria-labelledby="dropdownMenu2">
                             <button style="border-bottom: 1px solid black; text-align: center;"
-    class="dropdown-item" id="butEdit" type="button" onclick="openEditModal(${budget.budget_id})">Edit
-</button>
-                            <button style="text-align: center;" class="dropdown-item" name="delete" data-budget-id="${budget.budget_id}" onclick="deleteBudget(this)">Delete</button>
+                            class="dropdown-item" id="butEdit" type="button" onclick="openEditModal(${budget.budget_id})">Edit
+                                </button>
+                            <button class="dropdown-item" style="text-align: center; name="delete" data-budget-id="${budget.budget_id}" onclick="deleteBudget(this)">Delete</button>
 
                         </div>
-                    </div>
+                        </div>
                     </div>
 
 
@@ -551,6 +551,10 @@
 
 
 <style>
+    .dashboard-content {
+        font-family: 'inter';
+    }
+
     .colheight {
         height: 175px;
     }
@@ -571,14 +575,13 @@
     }
 
     .inpdate {
-        padding-left: 10px;
+        padding-left: -10px;
         background: url("https://img.icons8.com/material-rounded/24/tear-off-calendar.png") no-repeat right;
         background-size: 30px;
     }
 
     .modal .modal-header {
         border-radius: 0;
-
     }
 
     .modal-title {
@@ -605,6 +608,7 @@
 
     .validation-error-color {
         color: #c00000;
+        font-size: 12px;
     }
 
     .textdate {
@@ -613,18 +617,12 @@
         height: 38px;
     }
 
-    .add {
-        background: #8CEF84;
-        border-radius: 8px;
-        border: none;
-    }
-
     .amountalign {
         padding-right: 30px;
     }
 
     .datealign {
-        padding-right: 110px;
+        padding-right: 105px;
     }
 
     .dropdown {
@@ -700,9 +698,6 @@
     }
 
 
-    body {
-        font-family: 'inter';
-    }
 
     .text-budget {
         font-size: 40;

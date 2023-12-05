@@ -39,13 +39,6 @@ class BudgetController extends Controller
         return response()->json(['userBudgets' => $userBudgets]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -54,10 +47,6 @@ class BudgetController extends Controller
     {
 
         $validated = $request->validated();
-
-        if ($validated->fails()) {
-            return response()->json(['errors' => $validated->errors()], 422);
-        }
 
         $user_id = auth()->user()->id;
 
@@ -73,13 +62,6 @@ class BudgetController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function budgetEdit($id)
@@ -91,6 +73,7 @@ class BudgetController extends Controller
         if (!$budget) {
             return response()->json(['error' => 'Budget not found'], 404);
         }
+
 
         return response()->json(['budget' => $budget]);
     }

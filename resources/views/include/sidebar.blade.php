@@ -1,7 +1,7 @@
 <div class="sidebar" id="side_nav">
     <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
         <h1 class="fs-4">
-            <span class="bg-white text-dark rounded shadow px-2">MT</span>
+            <img src="{{ asset('images/piclogo-removebg.png') }}" class="rounded shadow" width="70" height="60" alt="">
 
         </h1>
         <button class="btn d-md-none d-block close-btn px-1 py-0 text-white">

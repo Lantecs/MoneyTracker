@@ -4,7 +4,7 @@
 
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="row row1">
             <div class="col col1 d-flex" data-aos="zoom-in">
                 <div class="consign">
                     @if (session()->has('error'))
@@ -76,6 +76,10 @@
 @endsection
 
 <style>
+    .row1 {
+        font-family: 'inter';
+    }
+
     .validation-error-color {
         color: #c00000;
         font-size: 12px;

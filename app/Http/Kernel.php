@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         // ... (existing middleware entries)
         'no-captcha' => \Anhskohbo\NoCaptcha\Middlewares\NoCaptchaMiddleware::class,
+        'verify_email' => \App\Http\Middleware\VerifyEmail::class,
     ];
 }

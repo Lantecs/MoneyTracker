@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\BudgetController;
+use App\Http\Controllers\Api\ExpensesController;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ForgetPasswordManager;
 use Illuminate\Support\Facades\Route;
@@ -31,42 +32,59 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/summary', function () {
         return view('summary');
-    })->name('summary');
+    })->name('summary')->middleware('verify_email');
 
     Route::get('/budget', function () {
         return view('budget');
     })->name('budget');
 
-    Route::get('/get-user-budgets', [BudgetController::class, 'getUserBudgets'])->name('get.user.budgets');
-    Route::post('/budgetadd', [BudgetController::class, 'budgetAdd'])->name('budget.add');
-    Route::get('/edit-user-budget/{id}', [BudgetController::class, 'budgetEdit'])->name('get.edit.budget');
-    Route::post('/budgetsave/{id}', [BudgetController::class, 'budgetSave'])->name('budget.save');
-    Route::delete('/budgetdelete/{id}', [BudgetController::class, 'budgetDelete'])->name('budget.delete');
-    Route::get('/budgetedit/{id}', [BudgetController::class, 'budgetEdit'])->name('budget.edit');
+    Route::controller(ExpensesController::class)->group(function () {
+        Route::get('/get-user-expenses', 'getUserExpenses')->name('get.user.expenses');
+        Route::post('/expensesadd', 'expensesAdd')->name('expenses.add');
+        Route::get('/edit-user-expenses/{id}', 'expensesEdit')->name('get.edit.expenses');
+        Route::delete('/expensesdelete/{id}', 'expensesDelete')->name('expenses.delete');
+        Route::post('/expensessave/{id}', 'expensesSave')->name('expenses.save');
+
+    });
+
+    Route::controller(BudgetController::class)->group(function () {
+        Route::get('/get-user-budgets', 'getUserBudgets')->name('get.user.budgets');
+        Route::post('/budgetadd', 'budgetAdd')->name('budget.add');
+        Route::get('/edit-user-budget/{id}', 'budgetEdit')->name('get.edit.budget');
+        Route::post('/budgetsave/{id}', 'budgetSave')->name('budget.save');
+        Route::delete('/budgetdelete/{id}', 'budgetDelete')->name('budget.delete');
+        Route::get('/budgetedit/{id}', 'budgetEdit')->name('budget.edit');
+    });
+
 });
 
 Route::get('/test_design', function () {
     return view('test_design');
 })->name('test.design');
 
+Route::controller(AuthManager::class)->group(function () {
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'loginPost')->name('login.post');
+    Route::get('/registration', 'registration')->name('registration');
+    Route::post('/registration', 'registrationPOST')->name('registration.post');
+    Route::get('/logout', 'logout')->name('logout');
+    Route::get('/verify/{token}', 'verifyPost')->name('verify');
 
-Route::get('/login', [AuthManager::class, 'login'])->name('login');
-Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
-Route::get('/registration', [AuthManager::class, 'registration'])->name('registration');
-Route::post('/registration', [AuthManager::class, 'registrationPOST'])->name('registration.post');
-Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
+});
 
-Route::get("/forget-password", [ForgetPasswordManager::class, "forgetPassword"])
-    ->name("forget.password");
+Route::controller(ForgetPasswordManager::class)->group(function () {
 
-Route::post("/forget-password", [ForgetPasswordManager::class, "forgetPasswordPost"])
-    ->name("forget.password.post");
+    Route::get("/forget-password", "forgetPassword")
+        ->name("forget.password");
 
-Route::get("/reset-password/{token}", [ForgetPasswordManager::class, "resetPassword"])
-    ->name("reset.password");
+    Route::post("/forget-password", "forgetPasswordPost")
+        ->name("forget.password.post");
+
+    Route::get("/reset-password/{token}", "resetPassword")
+        ->name("reset.password");
+
+});
 
 Route::post("/reset-password", [ForgetPasswordManager::class, "resetPasswordPost"])
     ->name("reset.password.post");
-
-Route::get('/verify/{token}', [AuthManager::class, 'verifyPost'])->name('verify');
 

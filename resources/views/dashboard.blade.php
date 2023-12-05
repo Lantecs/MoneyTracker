@@ -132,9 +132,9 @@
                 </div>
 
                 <h3 class="fw-bold">Income</h3>
-                <div class="container-fluid botcontainer bg-success">
+                <div class="container-fluid d-flex botcontainer ">
                     <div class="ps-3">
-                        <div class="container-income align-items-center  ">
+                        <div class="container-income align-items-center drowShadow ">
 
                             <form>
                                 <div class="container">
@@ -166,48 +166,269 @@
 
                         </div>
                     </div>
+                    <div class="container ps-4 ">
+                        <div class="container income-history drowShadow">
+                            <div class="container-lg income-align ">
+                                <div class="pt-4 pb-2">
+                                    <h3 class="fw-bold">History</h3>
+                                </div>
+                                <div class="container pt-3 pb-2">
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <h4>Type</h4>
+                                        </div>
+                                        <div class="col grey text-center">
+                                            <h4>Amount</h4>
+                                        </div>
+                                        <div class="col text-center">
+                                            <h4>Date</h4>
+                                        </div>
+                                        <div class="col"></div>
+                                    </div>
+                                </div>
+
+                                <div class="container scrollbar">
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <h4>Allowance</h4>
+                                        </div>
+                                        <div class="col grey text-center">
+                                            <h4>P400.00</h4>
+                                        </div>
+                                        <div class="col text-center">
+                                            <h4>22/10/2023</h4>
+                                        </div>
+                                        <div class="col">
+                                            <div class="dropdown d-flex justify-content-center pt-2">
+                                                <button
+                                                    style="color: #80AC64; border:1px solid #80AC64; background: #F1F1F1;"
+                                                    class="btn dropdown-toggle butdrop d-flex float-end" type="button"
+                                                    id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"></button>
+
+                                                <div style="background:#ECFAE2;border: 1px solid black;border-radius: 10px;"
+                                                    class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                    <button style="border-bottom: 1px solid black; text-align: center;"
+                                                        class="dropdown-item" id="butEdit" type="button"
+                                                        onclick="openEditModal(${budget.budget_id})">Edit
+                                                    </button>
+                                                    <button class="dropdown-item" style="text-align: center; name="delete"
+                                                        data-budget-id="${budget.budget_id}"
+                                                        onclick="deleteBudget(this)">Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <h4>Allowance</h4>
+                                        </div>
+                                        <div class="col grey text-center">
+                                            <h4>P400.00</h4>
+                                        </div>
+                                        <div class="col text-center">
+                                            <h4>22/10/2023</h4>
+                                        </div>
+                                        <div class="col">
+                                            <div class="dropdown d-flex justify-content-center pt-2">
+                                                <button
+                                                    style="color: #80AC64; border:1px solid #80AC64; background: #F1F1F1;"
+                                                    class="btn dropdown-toggle butdrop d-flex float-end" type="button"
+                                                    id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"></button>
+
+                                                <div style="background:#ECFAE2;border: 1px solid black;border-radius: 10px;"
+                                                    class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                    <button style="border-bottom: 1px solid black; text-align: center;"
+                                                        class="dropdown-item" id="butEdit" type="button"
+                                                        onclick="openEditModal(${budget.budget_id})">Edit
+                                                    </button>
+                                                    <button class="dropdown-item" style="text-align: center; name="delete"
+                                                        data-budget-id="${budget.budget_id}"
+                                                        onclick="deleteBudget(this)">Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <h4>Allowance</h4>
+                                        </div>
+                                        <div class="col grey text-center">
+                                            <h4>P400.00</h4>
+                                        </div>
+                                        <div class="col text-center">
+                                            <h4>22/10/2023</h4>
+                                        </div>
+                                        <div class="col">
+                                            <div class="dropdown d-flex justify-content-center pt-2">
+                                                <button
+                                                    style="color: #80AC64; border:1px solid #80AC64; background: #F1F1F1;"
+                                                    class="btn dropdown-toggle butdrop d-flex float-end" type="button"
+                                                    id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"></button>
+
+                                                <div style="background:#ECFAE2;border: 1px solid black;border-radius: 10px;"
+                                                    class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                    <button style="border-bottom: 1px solid black; text-align: center;"
+                                                        class="dropdown-item" id="butEdit" type="button"
+                                                        onclick="openEditModal(${budget.budget_id})">Edit
+                                                    </button>
+                                                    <button class="dropdown-item" style="text-align: center; name="delete"
+                                                        data-budget-id="${budget.budget_id}"
+                                                        onclick="deleteBudget(this)">Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <h4>Allowance</h4>
+                                        </div>
+                                        <div class="col grey text-center">
+                                            <h4>P400.00</h4>
+                                        </div>
+                                        <div class="col text-center">
+                                            <h4>22/10/2023</h4>
+                                        </div>
+                                        <div class="col">
+                                            <div class="dropdown d-flex justify-content-center pt-2">
+                                                <button
+                                                    style="color: #80AC64; border:1px solid #80AC64; background: #F1F1F1;"
+                                                    class="btn dropdown-toggle butdrop d-flex float-end" type="button"
+                                                    id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"></button>
+
+                                                <div style="background:#ECFAE2;border: 1px solid black;border-radius: 10px;"
+                                                    class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                    <button style="border-bottom: 1px solid black; text-align: center;"
+                                                        class="dropdown-item" id="butEdit" type="button"
+                                                        onclick="openEditModal(${budget.budget_id})">Edit
+                                                    </button>
+                                                    <button class="dropdown-item" style="text-align: center; name="delete"
+                                                        data-budget-id="${budget.budget_id}"
+                                                        onclick="deleteBudget(this)">Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
 
 
 
 
 
-        <style>
-            .container-income {
-                background: #F8FFF3;
-                border: 1px solid #757575;
-                width: 390px;
-                height: 350px;
-                border-radius: 10px;
+    <style>
+        :-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #8CEF84;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+
+        .scrollbar {
+            border-top: 1px solid #DCD4D4;
+            border-bottom: 1px solid #DCD4D4;
+            height: 180px;
+
+            &::-webkit-scrollbar {
+                background-color: transparent;
+                width: 10px;
             }
 
-            .drowShadow {
-                box-shadow: 0 2px 1px rgba(117, 117, 117, 0.5);
+            &::-webkit-scrollbar-thumb {
+                background-color: transparent;
             }
 
-            .walletSize {
-                font-size: 35px;
-                color: #757575;
+            max-height: 220px;
+            overflow-y: scroll;
+        }
+
+        .scrollbar:hover {
+            &::-webkit-scrollbar-thumb {
+                background-color: #D6EEC6;
             }
 
-            .daily-container {
-                width: 280px;
-                height: 120px;
-                border: 1px solid #757575;
-                border-radius: 10px;
+            &::-webkit-scrollbar-thumb:hover {
+                background: #8CEF84;
+
             }
 
-            .topcontainer {
-                height: 280px;
-            }
+        }
 
-            .botcontainer {
-                height: 350px;
-            }
+        .grey {
+            color: #757575;
+        }
 
-            .main-container {
-                font-family: 'inter';
-            }
-        </style>
+        .income-align {
+            height: 350px;
+        }
+
+        .income-history {
+            background: #F8FFF3;
+            border: 1px solid #757575;
+            width: 800px;
+            height: 350px;
+            border-radius: 10px;
+        }
+
+        .container-income {
+            background: #F8FFF3;
+            border: 1px solid #757575;
+            width: 390px;
+            height: 350px;
+            border-radius: 10px;
+        }
+
+        .drowShadow {
+            box-shadow: 0 2px 1px rgba(117, 117, 117, 0.5);
+        }
+
+        .walletSize {
+            font-size: 35px;
+            color: #757575;
+        }
+
+        .daily-container {
+            width: 280px;
+            height: 120px;
+            border: 1px solid #757575;
+            border-radius: 10px;
+        }
+
+        .topcontainer {
+            height: 280px;
+        }
+
+        .botcontainer {
+            height: 350px;
+        }
+
+        .main-container {
+            font-family: 'inter';
+        }
+    </style>

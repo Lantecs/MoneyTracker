@@ -1,7 +1,0 @@
-'mon' => $mondayExpenses,
-            'tue' => $tuesdayExpenses,
-            'wed' => $wednesdayExpenses,
-            'thur' => $thurdsayExpenses,
-            'fri' => $fridayExpenses,
-            'sat' => $saturdayExpenses,
-            'sun' => $sundayExpenses,

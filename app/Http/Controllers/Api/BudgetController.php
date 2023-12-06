@@ -54,7 +54,7 @@ class BudgetController extends Controller
         $data['budget_type'] = $request->budget_type;
         $data['category'] = $request->category;
         $data['amount'] = $request->amount;
-        $data['date'] = Carbon::parse($request->date)->format('Y-m-d');
+        $data['date'] = $request->date;
 
         $budget = UserBudgets::create($data);
 
@@ -107,7 +107,7 @@ class BudgetController extends Controller
         $budget->budget_type = $request->edited_budget_type;
         $budget->category = $request->edited_category;
         $budget->amount = $request->edited_amount;
-        $budget->date = Carbon::parse($request->edited_date)->format('Y-m-d');
+        $budget->date = $request->edited_date;
 
 
         $budget->save();

@@ -50,7 +50,7 @@ class ExpensesController extends Controller
         $expenses->type = $request->edited_type;
         $expenses->category = $request->edited_category;
         $expenses->amount = $request->edited_amount;
-        $expenses->date = Carbon::parse($request->edited_date)->format('Y-m-d');
+        $expenses->date = $request->edited_date;
 
 
         $expenses->save();
@@ -76,7 +76,7 @@ class ExpensesController extends Controller
         $data['type'] = $request->type;
         $data['category'] = $request->category;
         $data['amount'] = $request->amount;
-        $data['date'] = Carbon::parse($request->date)->format('Y-m-d');
+        $data['date'] = $request->date;
 
         $expenses = UserExpenses::create($data);
 
@@ -106,7 +106,7 @@ class ExpensesController extends Controller
 
             return response()->json(['expenses' => $expenses]);
         } catch (\Exception $e) {
-            // Log the exception
+
             Log::error($e);
 
             return response()->json(['error' => 'Internal Server Error'], 500);

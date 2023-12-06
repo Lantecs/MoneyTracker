@@ -2,6 +2,9 @@
 @section('title', 'Budget')
 @section('content')
 
+
+
+
     <div class="main-container d-flex">
         @include('include/sidebar')
         <div class="content">
@@ -41,7 +44,6 @@
             </div>
 
 
-
             <div class="dashboard-content">
                 <h2 class="ps-5 text-budget">Expenses</h2>
                 <div class="container-fluid outside">
@@ -58,7 +60,7 @@
                                 </div>
                                 <hr class="HrTopBox">
                             </div>
-                            <form id="expensesAddForm" action="">
+                            <form autocomplete="off" id="expensesAddForm" action="">
                                 <div class="row rowSize">
                                     <div class="col justify-content-center">
                                         <select id="category" class="form-select inputCategory" name="category">
@@ -155,10 +157,19 @@
 
         </div>
     </div>
+
 @endsection
 
 <script>
     loadUserExpenses();
+
+    $(function() {
+            $('#picker').datepicker({
+                format: 'dd-mm-yyyy',
+                autoclose: true,
+
+            });
+        });
 
     function saveEditExpenses(expensesId) {
         const form = document.getElementById('expensesSaveForm');
@@ -404,17 +415,17 @@
                     <br>
 
                     <button style="background-color: #8CEF84; border: 1px solid #69A544;"
-        type="button" class="btn float-end but_save"
+         type="button" class="btn float-end but_save"
         onclick="saveEditExpenses(${editExpenses.expenses_id})">Save
-</button>
+            </button>
 
 
                     <button type="button" style=" margin-right: 10px;       background-color: transparent;
                              border: 1px solid #69A544;" class="btn pt-2 float-end pe-3"
                         data-dismiss="modal">Cancel</button>
-</form>
+                    </form>
 
-        `;
+            `;
 
 
                     $('#editExpensesModal').modal('show');
@@ -431,7 +442,7 @@
     }
 
 
-    function loadUserExpenses() {
+       function loadUserExpenses() {
         fetch('/get-user-expenses', {
                 method: 'GET',
                 headers: {

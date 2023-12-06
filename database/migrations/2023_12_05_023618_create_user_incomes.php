@@ -10,19 +10,16 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('user_expenses', function (Blueprint $table) {
-            $table->id('expenses_id');
+        Schema::create('user_incomes', function (Blueprint $table) {
+            $table->id('income_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('category');
             $table->string('type');
             $table->decimal('amount');
             $table->date('date');
             $table->timestamps();
-            // $table->foreign('user_id')->references('id')->on('users');
         });
 
-
-        Schema::table('user_expenses', function (Blueprint $table) {
+        Schema::table('user_incomes', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
@@ -32,8 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-
-        Schema::dropIfExists('user_expenses');
-
+        Schema::dropIfExists('user_incomes');
     }
 };

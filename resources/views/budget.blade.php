@@ -2,6 +2,16 @@
 @section('title', 'Budget')
 @section('content')
 
+
+<?php
+
+$month = date('m');
+$day = date('d');
+$year = date('Y');
+
+$today = $day . '/' . $month . '/' . $year;
+?>
+
     <!-- Main container -->
     <div class="main-container d-flex">
         <!-- Include sidebar -->
@@ -55,7 +65,7 @@
 
                             <!-- Budget Plan Form -->
                             <div class="container">
-                                <form id="budgetAddForm" class="needs-validation" novalidate>
+                                <form autocomplete="off" id="budgetAddForm" class="needs-validation" novalidate>
                                     <!-- Form fields for budget input -->
                                     <div class="row">
                                         <!-- First column -->
@@ -105,7 +115,7 @@
                                             <br>
 
                                             <!-- Date input -->
-                                            <label for="budget_type" class="labelColor pt-1">Date:</label><br>
+                                            <label for="budget_type"  class="labelColor pt-1">Date:</label><br>
                                             <div class="input-group date">
                                                 <input id="picker" type="text" class="form-control inpdate" readonly
                                                     name="date">
@@ -182,7 +192,7 @@
         const form = document.getElementById('budgetSaveForm');
         const formData = new FormData(form);
 
-        
+
 
         fetch(`/budgetsave/${budgetId}`, {
                 method: 'POST',
@@ -372,7 +382,7 @@
 
 
                     document.getElementById('editForm').innerHTML = `
-                    <form id="budgetSaveForm">
+                    <form autocomplete="off" id="budgetSaveForm">
 
                                 <label for="budget_type" class="">Budget type:</label><br>
                                 <input type="text" style="        background-color: transparent;
